@@ -5,12 +5,11 @@
     <div class="flex flex-col gap-2" *ngIf="mensajes.length > 0">
       <div *ngFor="let msg of mensajes" class=" px-3 py-1  rounded-md flex flex-col" [ngClass]="mymessages(msg)">
         <p class="text-xs">{{msg.UserName || msg.userName}}</p>
-        <div class="flex gap-2">
-          <p class="text-right">{{msg.Mensaje || msg.mensaje}}</p>
-          <p class="text-xs mt-3">{{parseDate(msg.createdDate || msg.CreatedDate)}}</p>
-        </div>
         
-      
+        <p class="">{{msg.Mensaje || msg.mensaje}}</p>
+
+        <p class="text-xs mt-1 text-right">{{parseDate(msg.createdDate || msg.CreatedDate)}}</p>
+
       </div>
     </div>
   </div>
