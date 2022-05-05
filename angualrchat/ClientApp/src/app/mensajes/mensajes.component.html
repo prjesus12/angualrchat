@@ -1,0 +1,21 @@
+<h1>Welcome <b>{{usercontroller.UserName}}</b></h1>
+
+<div class="p-3 bg-white rounded-md mt-3" style="height: 400px;">
+  <div id="chat" class="p-3 bg-slate-100" style="height: 300px; overflow: auto;">
+    <div class="flex flex-col gap-2" *ngIf="mensajes.length > 0">
+      <div *ngFor="let msg of mensajes" class=" px-3 py-1  rounded-md flex flex-col" [ngClass]="mymessages(msg)">
+        <p class="text-xs">{{msg.UserName || msg.userName}}</p>
+        <div class="flex gap-2">
+          <p class="text-right">{{msg.Mensaje || msg.mensaje}}</p>
+          <p class="text-xs mt-3">{{parseDate(msg.createdDate || msg.CreatedDate)}}</p>
+        </div>
+        
+      
+      </div>
+    </div>
+  </div>
+  <div class="flex items-center gap-2 mt-2">
+    <input class="bg-white border rounded-md w-full px-3 py-1" [(ngModel)]="mensaje.Mensaje" (keydown.enter)="submit()" />
+    <button (click)="submit()" class="bg-green-500 rounded-md text-white px-3 py-1 flex items-center">Send</button>
+  </div>
+</div>
