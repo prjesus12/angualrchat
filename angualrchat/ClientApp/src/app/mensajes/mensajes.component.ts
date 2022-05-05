@@ -30,9 +30,13 @@ export class MensajesComponent implements OnInit {
     this.scrollChat()
     //this.sender.hubConnection.on("todos")
     this.sender.emNotifica.subscribe((value) => {
+      if (value) {
+        if (value.mensaje != '' || value.Mensaje != '')
+        this.mensajes.push(value);
+        this.scrollChat()
+      }
+      
      
-      this.mensajes.push(value);
-      this.scrollChat()
       setInterval(() => {
         this.cdr.detectChanges();
       }, 500);
@@ -93,9 +97,12 @@ export class MensajesComponent implements OnInit {
       }
     }).subscribe((res) => {
       
-      //this.mensajes 
-      this.mensajes = res;
-      this.scrollChat()
+      //this.mensajes
+      if (res.length > 0) {
+        this.mensajes = res.reverse();
+        this.scrollChat()
+      }
+      
     })
   }
 
