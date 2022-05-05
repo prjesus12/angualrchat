@@ -15,7 +15,8 @@ export class MensajesComponent implements OnInit {
   mensaje = {
     IdUser:"",
     Mensaje:"",
-    UserName: ""
+    UserName: "",
+    CreatedDate: new Date()
   }
 
   mensajes: Array<Mensaje> =[]
@@ -54,7 +55,7 @@ export class MensajesComponent implements OnInit {
     }
     this.mensaje.IdUser = this.usercontroller.Token;
     this.mensaje.UserName = this.usercontroller.UserName;
-    
+    this.mensaje.CreatedDate = new Date();
     let url = "/api/MensajeDbs"
     //url = "https://jesuschat.azurewebsites.net/api/MensajeDbs"
     this.http.post<any>(url, this.mensaje).subscribe((res) => {

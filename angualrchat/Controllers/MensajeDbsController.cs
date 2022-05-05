@@ -37,7 +37,7 @@ namespace angualrchat.Controllers
                 {
                     if(result.Id == token)
                     {
-                        return await _context.Mensaje.Take(30).OrderBy(c => c.CreatedDate).ToListAsync();
+                        return await _context.Mensaje.Take(30).OrderByDescending(c => c.CreatedDate).ToListAsync();
                     }
                     return Ok(new Response { Status = "401", Message = "Unathorized Access" });
                 }
@@ -103,7 +103,7 @@ namespace angualrchat.Controllers
             MensajeDb msg = new MensajeDb() 
             { 
                 Mensaje = mensajeDb.Mensaje, IdUser = mensajeDb.IdUser, 
-                CreatedDate =  DateTime.Now, UserName = mensajeDb.UserName
+                CreatedDate = mensajeDb.CreatedDate, UserName = mensajeDb.UserName
             };
             _context.Mensaje.Add(msg);
             await _context.SaveChangesAsync();
