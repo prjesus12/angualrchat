@@ -29,10 +29,15 @@ export class RegisterComponent implements OnInit {
       return ;
     }
     this.http.post<any>(url, this.user).subscribe(data => {
-      if (data.status == 'Success') {
-        this.toast.success(data.message)
+      if (data.Status == 'Success') {
+        this.toast.success(data.Message)
+        this.user = {
+          Email: "",
+          UserName: "",
+          PasswordHash: ""
+        }
       }else{
-        this.toast.error(data.message)
+        this.toast.error(data.Message)
       }  
     })
   }

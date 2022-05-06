@@ -24,6 +24,7 @@ export class UserControllerService implements OnInit {
       
     }
   }
+  
   login(UserName:string, Token:string){
     this.isAuth = true;
     this.UserName = UserName;

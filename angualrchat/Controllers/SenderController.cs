@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace angualrchat.Controllers
 {
@@ -26,7 +28,8 @@ namespace angualrchat.Controllers
         [HttpPost]
         public IActionResult SendMensaje([FromBody] MensajeDb mensaje)
         {
-            string msg = Newtonsoft.Json.JsonConvert.SerializeObject(mensaje);
+            
+            string msg = JsonConvert.SerializeObject(mensaje);
 
 
             _hubContext.Clients.All.SendAsync("enviartodos", msg);

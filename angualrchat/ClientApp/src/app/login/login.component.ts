@@ -29,14 +29,14 @@ export class LoginComponent implements OnInit {
     this.http.post<any>(url, this.user).subscribe(data => {
       if (data) {
         
-        if(data.status == "Success"){
-          let dataParsed = JSON.parse(data.message)
+        if(data.Status == "Success"){
+          let dataParsed = JSON.parse(data.Message)
           this.usercontroller.login(dataParsed.UserName, dataParsed.Id)
           
           this.toast.success(dataParsed.UserName + " logged")
           this.router.navigate(["/"]);
         }else{
-          this.toast.error(data.message)
+          this.toast.error(data.Message)
           
         }
         

@@ -16,7 +16,13 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 
 // Add services to the container.
 //builder.Services.AddControllersWithViews();
-builder.Services.AddControllers();
+
+//builder.Services.AddControllers();
+
+builder.Services.AddControllers()
+            .AddJsonOptions(options =>
+               options.JsonSerializerOptions.PropertyNamingPolicy = null);
+
 
 //builder.Services.AddApiVersioning().AddControllers();
 

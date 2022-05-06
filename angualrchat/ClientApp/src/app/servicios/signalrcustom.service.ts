@@ -10,7 +10,7 @@ export class SignalrcustomService {
   constructor() {
     let builder = new HubConnectionBuilder();
     let url = "https://jesuschat.azurewebsites.net/cnn"
-    // url ="http://localhost:5069/cnn"
+    //url ="http://localhost:5069/cnn"
     this.hubConnection = builder.withUrl(url).build();
 
     this.hubConnection.on("enviartodos", (mensaje) => {

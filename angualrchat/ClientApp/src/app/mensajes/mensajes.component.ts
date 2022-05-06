@@ -28,15 +28,15 @@ export class MensajesComponent implements OnInit {
 
   ngOnInit() {
     this.scrollChat()
-    //this.sender.hubConnection.on("todos")
+   
     this.sender.emNotifica.subscribe((value) => {
       if (value) {
-        if (value.mensaje != '' || value.Mensaje != '')
+        if (value.Mensaje != '')
         this.mensajes.push(value);
         this.scrollChat()
       }
       
-     
+      //verifica si hay un cambio en la data para renderizar el nuevo cambio
       setInterval(() => {
         this.cdr.detectChanges();
       }, 500);
@@ -44,14 +44,9 @@ export class MensajesComponent implements OnInit {
     })
   }
 
-  // submit(){
-  //   this.mensajes.push({
-  //     mensaje: this.mensaje.Mensaje,
-  //     UserName: "Bob"
-  //   })
-  //   this.scrollChat()
-  // }
-
+  /*
+    guarda el mensaje en la base de datos
+  */
   submit(){
     if(this.mensaje.Mensaje == ''){
       alert("Cant send empty message")
@@ -61,14 +56,16 @@ export class MensajesComponent implements OnInit {
     this.mensaje.UserName = this.usercontroller.UserName;
     this.mensaje.CreatedDate = new Date();
     let url = "/api/MensajeDbs"
-    //url = "https://jesuschat.azurewebsites.net/api/MensajeDbs"
+    
     this.http.post<any>(url, this.mensaje).subscribe((res) => {
       
       this.emmitMensaje()
-      //this.mensajes.push(res)
+     
     })
   }
-
+  /*
+    envia el mensaje a todos los usuarios loggeados
+  */
   emmitMensaje(){
     let url = "/api/sender"
     //url = "https://jesuschat.azurewebsites.net/api/sender"
@@ -76,10 +73,13 @@ export class MensajesComponent implements OnInit {
      
       this.mensaje.Mensaje = ''
       this.scrollChat()
-      //this.mensajes.push(res)
+      
     })
   }
 
+  /*
+    busca el elem chat en el html y hace scroll hasta el ultimo mensaje
+  */
   scrollChat() {
     var chat = document.getElementById("chat") as HTMLDivElement;
 
@@ -89,6 +89,10 @@ export class MensajesComponent implements OnInit {
     
   }
 
+
+  /*
+    Para buscar todos los mensajes 
+  */
   fetchOnInit(){
     let url = "/api/MensajeDbs";
     this.http.get<any>(url, {
@@ -105,11 +109,13 @@ export class MensajesComponent implements OnInit {
       
     })
   }
-
+  /*
+    Para darle estilo a los mensajes en el html
+    Si el mensaje del usuario es igual su username ... el mensaje se muestra a la derecha en color azul
+    de lo contrario ... el mensaje va a la izquierda en color gris
+  */
   mymessages(value:any){
-    if(value.userName == this.usercontroller.UserName){
-      return 'self-end text-white bg-blue-400'
-    }
+    
     if(value.UserName == this.usercontroller.UserName){
       return 'self-end text-white bg-blue-400'
     }
